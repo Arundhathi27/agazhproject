@@ -1,16 +1,12 @@
 import React from 'react'
-import Vission from './pages/Vission'
-import Aboutus from './pages/Aboutus'
+import Home from './pages/Home'
 
 const App = () => {
-  return (
-    <>
-    <Vission></Vission>
-    <Aboutus></Aboutus>
-    </> 
-
-    
-  )
+    return (
+        <>
+            <Home />
+        </>
+    )
 }
 
 export default App

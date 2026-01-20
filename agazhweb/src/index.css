@@ -8,10 +8,11 @@
   --color-brand-accent: #8D6E63;
   --color-brand-light: #EFEBE9;
   --color-brand-dark: #3E2723;
-  
+
   --font-serif: "Playfair Display", serif;
   --font-sans: "Lato", sans-serif;
-  --font-display: "Rye", serif; /* Funky/Archaeology Display Font */
+  --font-display: "Rye", serif;
+  /* Funky/Archaeology Display Font */
 }
 
 html {
@@ -21,4 +22,22 @@ html {
 body {
   background-color: var(--color-brand-light);
   color: var(--color-brand-dark);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-char {
+  animation: fadeInUp 0.5s cubic-bezier(0.2, 0.65, 0.3, 0.9) forwards;
+  opacity: 0;
+  /* Start hidden */
 }

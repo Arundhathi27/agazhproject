@@ -1,132 +1,167 @@
-import React from 'react';
-import herobannerImg from '../Images/herobanner.png';
-import image from '../Images/image.png';
-
-const AnimatedText = ({ text, className, tag: Tag = 'p', baseDelay = 0 }) => {
-  return (
-    <Tag className={`${className} flex flex-wrap justify-center`}>
-      {text.split(' ').map((word, wordIndex) => (
-        <span key={wordIndex} className="inline-block whitespace-nowrap">
-           {word.split('').map((char, charIndex) => (
-             <span
-               key={charIndex}
-               className="inline-block animate-char"
-                // Calculate global index approximation for delay smoothness
-               style={{ 
-                 animationDelay: `${baseDelay + (wordIndex * 5 + charIndex) * 0.05}s` 
-               }}
-             >
-               {char}
-             </span>
-           ))}
-           {/* Add space after word unless it's the last one */}
-           <span className="inline-block">&nbsp;</span>
-        </span>
-      ))}
-    </Tag>
-  );
-};
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+const heroImage = '/images/hero_temple_ruins_1768917098837.png';
 
 const Herobanner = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
 
-  const [tilt, setTilt] = React.useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = React.useState(false);
-
-  const handleMouseMove = (e) => {
-    if (!isHovering) setIsHovering(true);
-    const { clientX, clientY, currentTarget } = e;
-    const { left, top, width, height } = currentTarget.getBoundingClientRect();
-    
-    // Calculate mouse position relative to center of the element (-1 to 1)
-    const x = (clientX - left - width / 2) / (width / 2);
-    const y = (clientY - top - height / 2) / (height / 2);
-    
-    // Tilt strength (max rotation in degrees)
-    const tiltStrength = 5;
-    
-    // Calculate and set rotation values directly
-    setTilt({ 
-      x: -y * tiltStrength, 
-      y: x * tiltStrength 
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-    setTilt({ x: 0, y: 0 });
-  };
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
   return (
-    <section 
-      id="home" 
-      className="relative w-full min-h-screen overflow-hidden flex items-center justify-center text-center bg-brand-dark"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      // Add touch support roughly mapping to move
-      onTouchMove={(e) => {
-         const touch = e.touches[0];
-         handleMouseMove({ ...touch, currentTarget: e.currentTarget });
-      }}
-      onTouchEnd={handleMouseLeave}
-    >
-      
-      {/* Background Image - Scale slightly for drama */}
-      <div 
-        className={`absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-transform ease-out origin-center will-change-transform ${isHovering ? 'duration-100' : 'duration-700'}`}
-        style={{ 
-            backgroundImage: `url(${image})`,
-            // Apply scale AND tilt to background
-            transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.1, 1.1, 1.1)`
-        }}
-      >
-        {/* Simplified Overlay - Dark gradient from top for Navbar blend */}
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/80 via-transparent to-brand-dark/40"></div> 
-      </div>
+    <div ref={containerRef} id="home" className="relative h-screen w-full overflow-hidden bg-brand-dark">
 
-      {/* Content - Funky Typography */}
-      {/* Add a slight parallax to content too for depth (inverse direction or slower), BUT NO SCALE */}
-      <div 
-        className={`relative z-10 px-4 max-w-5xl mx-auto text-white mt-16 transition-transform ease-out ${isHovering ? 'duration-100' : 'duration-700'}`}
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]"
         style={{
-            // Apply half tilt to text for depth, explicitly force scale(1) to prevent inheritance or zoom
-            transform: `perspective(1000px) rotateX(${tilt.x / 2}deg) rotateY(${tilt.y / 2}deg) scale3d(1, 1, 1)`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%235D4037' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
         }}
+      />
+
+      {/* Parallax Background Image with generated custom image */}
+      <motion.div
+        style={{
+          y,
+          scale,
+          willChange: 'transform'
+        }}
+        className="absolute inset-0 z-0"
       >
-        <AnimatedText 
-            tag="h1"
-            className="text-6xl md:text-8xl font-display text-brand-light mb-6 drop-shadow-2xl tracking-tight"
-            text="AGAZH AVAIYAM"
-            baseDelay={0}
-        />
-        
-        <div className="flex items-center justify-center gap-4 mb-8 opacity-0 animate-[fadeInUp_1s_ease-out_1s_forwards]">
-            <div className="h-0.5 w-24 bg-brand-tan/60"></div>
-        </div>
+        <div
+          className="w-full h-full bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${heroImage})`,
+            imageRendering: 'crisp-edges'
+          }}
+        >
+          {/* Noise/Grain texture */}
+          <div className="absolute inset-0 opacity-[0.15] mix-blend-overlay"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`
+            }}
+          />
 
-        <AnimatedText 
-            tag="p"
-            className="text-xl md:text-3xl font-sans font-light tracking-widest text-brand-tan uppercase mb-8 drop-shadow-lg"
-            text="A Centre for Archaeological Excellence"
-            baseDelay={0.8}
-        />
-        
-        <AnimatedText 
-            tag="p"
-            className="text-lg md:text-xl italic font-serif text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-lg mb-16"
-            text="&quot;The echoes of the past that whispers revelation through voices of the present in guiding every step towards the future&quot;"
-            baseDelay={2.5}
-        />
-
-        {/* Flashing Down Arrow */}
-        <div className="animate-bounce">
-            <a href="#aboutus" className="text-white hover:text-brand-tan transition-colors">
-                <svg className="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                </svg>
-            </a>
+          {/* Gradient Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-dark/60 to-brand-dark" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-brown/40 to-transparent" />
         </div>
+      </motion.div>
+
+      {/* Floating Decorative Elements */}
+      <motion.div
+        animate={{
+          y: [0, -20, 0],
+          rotate: [0, 5, 0]
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute top-20 right-20 w-32 h-32 border-2 border-brand-tan/10 rounded-full hidden lg:block"
+      />
+
+      <motion.div
+        animate={{
+          y: [0, 20, 0],
+          rotate: [0, -5, 0]
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute bottom-40 left-10 w-24 h-24 border border-brand-tan/20 hidden lg:block"
+        style={{ transform: 'rotate(45deg)' }}
+      />
+
+      {/* Main Content */}
+      <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4">
+
+        <motion.div
+          style={{ opacity }}
+          className="mb-8"
+        >
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="h-px w-24 bg-brand-tan mb-8 mx-auto"
+          />
+
+          <motion.h1
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="text-7xl sm:text-8xl md:text-9xl lg:text-[13vw] leading-[0.9] font-display font-bold text-brand-tan tracking-tighter drop-shadow-2xl mb-4"
+          >
+            AGAZH<br />
+            <span className="text-white/90">AVAIYAM</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            className="text-white/70 font-serif text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-6 sm:mt-8 px-4"
+          >
+            A Centre for Archaeological Excellence
+          </motion.p>
+
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
+            className="h-px w-24 sm:w-32 bg-gradient-to-r from-transparent via-brand-tan to-transparent mt-6 sm:mt-8 mx-auto"
+          />
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.8, duration: 0.8 }}
+            className="text-white/60 font-serif italic text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed mt-6 sm:mt-8 px-6"
+          >
+            "The echoes of the past whisper revelation through voices of the present, guiding every step towards the future"
+          </motion.p>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.5, duration: 1 }}
+          className="absolute bottom-10"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="flex flex-col items-center gap-2"
+          >
+            <span className="text-brand-tan/60 text-xs uppercase tracking-widest">Scroll</span>
+            <div className="w-6 h-10 border-2 border-brand-tan/40 rounded-full flex justify-center p-1">
+              <motion.div
+                animate={{ y: [0, 12, 0] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="w-1 h-2 bg-brand-tan/60 rounded-full"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
-    </section>
+    </div>
   );
 };
 

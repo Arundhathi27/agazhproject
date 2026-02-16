@@ -1,12 +1,36 @@
-import React from 'react'
-import Home from './pages/Home'
+import React, { useEffect } from 'react';
+import Home from './pages/Home';
+import Lenis from 'lenis';
 
 const App = () => {
-    return (
-        <>
-            <Home />
-        </>
-    )
-}
+    useEffect(() => {
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
 
-export default App
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        return () => {
+            lenis.destroy();
+        };
+    }, []);
+
+    return (
+        <main className="antialiased">
+            <Home />
+        </main>
+    );
+};
+
+export default App;

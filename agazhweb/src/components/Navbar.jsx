@@ -4,6 +4,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { createPortal } from 'react-dom';
 
+const smoothScrollTo = (href, e) => {
+    if (e) e.preventDefault();
+    const id = href.replace('#', '');
+    const el = document.getElementById(id);
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+};
+
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
@@ -127,6 +136,7 @@ const Navbar = () => {
                             <a
                                 key={link.name}
                                 href={link.href}
+                                onClick={(e) => smoothScrollTo(link.href, e)}
                                 className={`text-xs font-bold uppercase tracking-widest transition-colors ${scrolled ? 'text-brand-dark/70 hover:text-brand-dark' : 'text-white/80 hover:text-white'}`}
                             >
                                 {link.name}
@@ -134,7 +144,7 @@ const Navbar = () => {
                         ))}
 
                         {/* CTA Button */}
-                        <a href="#contactus" className={`text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-sm transition-colors shadow-lg ${scrolled ? 'bg-brand-accent text-white hover:bg-brand-brown' : 'bg-white text-brand-dark hover:bg-brand-tan'}`}>
+                        <a href="#contactus" onClick={(e) => smoothScrollTo('#contactus', e)} className={`text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-sm transition-colors shadow-lg ${scrolled ? 'bg-brand-accent text-white hover:bg-brand-brown' : 'bg-white text-brand-dark hover:bg-brand-tan'}`}>
                             Contact Us
                         </a>
                     </div>
@@ -194,7 +204,7 @@ const Navbar = () => {
                                                     key={link.name}
                                                     variants={linkVariants}
                                                     whileHover={{ x: 10, scale: 1.02 }}
-                                                    onClick={() => setIsOpen(false)}
+                                                    onClick={(e) => { smoothScrollTo(link.href, e); setIsOpen(false); }}
                                                     className="group flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-brand-tan/20 transition-all duration-300 active:scale-95"
                                                 >
                                                     <div className="w-10 h-10 rounded-lg bg-brand-tan/10 flex items-center justify-center text-brand-tan group-hover:bg-brand-tan group-hover:text-brand-dark transition-colors duration-300">
@@ -218,7 +228,7 @@ const Navbar = () => {
                                             <motion.div variants={linkVariants} className="pt-6">
                                                 <a
                                                     href="#contactus"
-                                                    onClick={() => setIsOpen(false)}
+                                                    onClick={(e) => { smoothScrollTo('#contactus', e); setIsOpen(false); }}
                                                     className="relative group block w-full text-center py-4 bg-gradient-to-r from-brand-accent to-brand-brown rounded-xl overflow-hidden shadow-lg shadow-brand-accent/20"
                                                 >
                                                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />

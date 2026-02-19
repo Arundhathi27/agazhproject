@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-const heritageImg = '/images/heritage_walk_team_1768917192614.png';
-const workshopImg = '/images/excavation_hands_1768917147028.png';
-const careerImg = '/images/career_guidance_1768917220575.png';
+const heritageImg = `${import.meta.env.BASE_URL}images/heritage_walk_team_1768917192614.png`;
+const workshopImg = `${import.meta.env.BASE_URL}images/excavation_hands_1768917147028.png`;
+const careerImg = `${import.meta.env.BASE_URL}images/career_guidance_1768917220575.png`;
 
 const projects = [
   {

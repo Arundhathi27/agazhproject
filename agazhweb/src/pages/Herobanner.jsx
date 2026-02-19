@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-const heroImage = '/images/hero_temple_ruins_1768917098837.png';
+const heroImage = `${import.meta.env.BASE_URL}images/hero_temple_ruins_1768917098837.png`;
 
 const Herobanner = () => {
   const containerRef = useRef(null);

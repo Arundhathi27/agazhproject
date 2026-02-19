@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-const schoolImg = '/images/students_workshop_1768917126967.png';
-const collegeImg = '/images/career_guidance_1768917220575.png';
-const layImg = '/images/heritage_walk_team_1768917192614.png';
+const schoolImg = `${import.meta.env.BASE_URL}images/students_workshop_1768917126967.png`;
+const collegeImg = `${import.meta.env.BASE_URL}images/career_guidance_1768917220575.png`;
+const layImg = `${import.meta.env.BASE_URL}images/heritage_walk_team_1768917192614.png`;
 
 const audienceData = [
   {

@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
-const digImg = '/images/archaeology_dig_team_1768911719447.png';
-const templeImg = '/images/hero_temple_ruins_1768917098837.png';
-const artifactImg = '/images/ancient_artifact_hands_1768911747714.png';
-const workshopImg = '/images/pottery_workshop_students_1768911974461.png';
-const excavationImg = '/images/excavation_hands_1768917147028.png';
+const digImg = `${import.meta.env.BASE_URL}images/archaeology_dig_team_1768911719447.png`;
+const templeImg = `${import.meta.env.BASE_URL}images/hero_temple_ruins_1768917098837.png`;
+const artifactImg = `${import.meta.env.BASE_URL}images/ancient_artifact_hands_1768911747714.png`;
+const workshopImg = `${import.meta.env.BASE_URL}images/pottery_workshop_students_1768911974461.png`;
+const excavationImg = `${import.meta.env.BASE_URL}images/excavation_hands_1768917147028.png`;
 
 /* ── stat pills shown in AIM section ── */
 const stats = [
@@ -67,8 +67,8 @@ const MissionTab = ({ item, index, active, onSelect }) => {
         <motion.button
             onClick={() => onSelect(index)}
             className={`relative text-left w-full rounded-2xl p-5 sm:p-6 border-2 transition-all duration-500 overflow-hidden ${isActive
-                    ? 'border-brand-brown bg-brand-dark shadow-2xl'
-                    : 'border-brand-brown/20 bg-white hover:border-brand-brown/50 hover:shadow-lg'
+                ? 'border-brand-brown bg-brand-dark shadow-2xl'
+                : 'border-brand-brown/20 bg-white hover:border-brand-brown/50 hover:shadow-lg'
                 }`}
             whileHover={{ scale: isActive ? 1 : 1.01 }}
             whileTap={{ scale: 0.99 }}

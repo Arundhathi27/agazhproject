@@ -6,6 +6,7 @@ const templeImg = `${import.meta.env.BASE_URL}images/hero_temple_ruins_176891709
 const artifactImg = `${import.meta.env.BASE_URL}images/ancient_artifact_hands_1768911747714.png`;
 const workshopImg = `${import.meta.env.BASE_URL}images/pottery_workshop_students_1768911974461.png`;
 const excavationImg = `${import.meta.env.BASE_URL}images/excavation_hands_1768917147028.png`;
+const sculptureImg = `${import.meta.env.BASE_URL}images/sculpture_detail_1768917167490.png`;
 
 /* ── stat pills shown in AIM section ── */
 const stats = [
@@ -433,7 +434,7 @@ const AimMission = () => {
                             className="inline-flex items-center gap-2 sm:gap-3 bg-white shadow-lg rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-6 sm:mb-8"
                         >
                             <div className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
-                            <span className="font-mono text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-brand-brown">What We Do</span>
+                            <span className="font-mono text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-brand-brown">Our Mission in Action</span>
                         </motion.div>
 
                         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-brand-dark leading-tight mb-4 sm:mb-6">
@@ -461,12 +462,34 @@ const AimMission = () => {
                             whileInView={{ scaleX: 1 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
                             viewport={{ once: true }}
-                            className="h-1.5 sm:h-2 w-24 sm:w-32 bg-gradient-to-r from-brand-brown via-brand-accent to-brand-tan mx-auto rounded-full"
+                            className="h-1.5 sm:h-2 w-24 sm:w-32 bg-gradient-to-r from-brand-brown via-brand-accent to-brand-tan mx-auto rounded-full mb-10"
                         />
+
+                        {/* Mission Intro - Igniting Curiosity */}
+                        <div className="max-w-3xl mx-auto space-y-4">
+                            <motion.p
+                                initial={{ opacity: 0, y: 15 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.6, duration: 0.7 }}
+                                viewport={{ once: true }}
+                                className="text-brand-dark/80 text-lg sm:text-xl md:text-2xl leading-relaxed italic"
+                            >
+                                "To empower <span className="font-bold text-brand-brown">students, educators, and enthusiasts</span> by providing high-quality archaeological learning and unforgettable experiences."
+                            </motion.p>
+                            <motion.p
+                                initial={{ opacity: 0, y: 15 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.7, duration: 0.7 }}
+                                viewport={{ once: true }}
+                                className="text-brand-dark/70 text-base sm:text-lg leading-relaxed"
+                            >
+                                Through our guided tours, educational workshops, and experimental archaeology sessions, we invite participants to discover, explore, and actively engage with archaeological heritage.
+                            </motion.p>
+                        </div>
                     </motion.div>
 
                     {/* Tab + Panel layout */}
-                    <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 items-start mb-20 sm:mb-28 md:mb-36">
 
                         {/* Left: Tab list */}
                         <motion.div
@@ -569,6 +592,88 @@ const AimMission = () => {
                             </AnimatePresence>
                         </motion.div>
                     </div>
+
+                    {/* ── Why Choose Us Section (Added) ── */}
+                    <div className="pt-16 sm:pt-24 border-t border-brand-brown/10">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            {/* Left: Text */}
+                            <motion.div
+                                initial={{ opacity: 0, x: -50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.8 }}
+                                viewport={{ once: true }}
+                            >
+                                <motion.div
+                                    initial={{ y: 10, opacity: 0 }}
+                                    whileInView={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.2 }}
+                                    viewport={{ once: true }}
+                                    className="inline-flex items-center gap-3 mb-6"
+                                >
+                                    <div className="h-px w-10 bg-brand-brown" />
+                                    <span className="font-mono text-xs uppercase tracking-[0.3em] text-brand-brown">Why Choose Us</span>
+                                </motion.div>
+
+                                <h3 className="text-4xl sm:text-5xl md:text-6xl font-display text-brand-dark leading-tight mb-8">
+                                    <span className="block">Beyond</span>
+                                    <span className="block text-brand-brown italic">Textbooks</span>
+                                </h3>
+
+                                <div className="space-y-6">
+                                    <p className="text-brand-dark/70 text-lg sm:text-xl leading-relaxed">
+                                        We believe that archaeology is most impactful when it <span className="font-bold text-brand-dark">goes beyond textbooks</span>. By combining fieldwork, experiential learning, and heritage tourism, we inspire a genuine appreciation for the past.
+                                    </p>
+                                    <p className="text-brand-dark/70 text-base sm:text-lg leading-relaxed">
+                                        Our approach <span className="font-bold text-brand-brown">nurtures curiosity and lifelong learning</span>, helping participants build a personal connection to cultural legacies through discovery and participation.
+                                    </p>
+                                </div>
+                            </motion.div>
+
+                            {/* Right: Visual panel */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                                viewport={{ once: true }}
+                                className="relative"
+                            >
+                                <div className="relative h-64 sm:h-80 md:h-[400px] rounded-3xl overflow-hidden bg-white border-2 border-brand-brown/15 shadow-2xl">
+                                    {/* Sculpture watermark */}
+                                    <div className="absolute inset-0 opacity-[0.06]">
+                                        <img src={sculptureImg} alt="" className="w-full h-full object-cover object-center" />
+                                    </div>
+                                    {/* Geometric grid overlay */}
+                                    <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `radial-gradient(circle, #5D4037 1px, transparent 1px)`, backgroundSize: '30px 30px' }} />
+                                    {/* Centre content */}
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
+                                        <motion.div
+                                            animate={{ rotate: [0, 5, -5, 0] }}
+                                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                                            className="w-20 h-20 sm:w-28 rounded-2xl bg-gradient-to-br from-brand-brown to-brand-dark shadow-2xl flex items-center justify-center"
+                                        >
+                                            <span className="text-4xl sm:text-5xl">✨</span>
+                                        </motion.div>
+                                        {/* Three feature pills */}
+                                        <div className="flex flex-wrap gap-2 justify-center px-6">
+                                            {['Fieldwork', 'Heritage Tours', 'Research'].map((tag, i) => (
+                                                <motion.span
+                                                    key={tag}
+                                                    initial={{ opacity: 0, scale: 0.8 }}
+                                                    whileInView={{ opacity: 1, scale: 1 }}
+                                                    transition={{ delay: 0.6 + i * 0.15 }}
+                                                    viewport={{ once: true }}
+                                                    className="bg-brand-brown/10 text-brand-dark/70 font-mono text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-full border border-brand-brown/20"
+                                                >
+                                                    {tag}
+                                                </motion.span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>

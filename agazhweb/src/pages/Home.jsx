@@ -4,9 +4,9 @@ import Herobanner from './Herobanner'
 import Service from './Service'
 import Events from './Events'
 import AboutUs from './Aboutus'
-import WhatWeOffer from './WhatWeOffer'
 import AimMission from './AimMission'
 import ContactUs from './ContactUs'
+import HeritagePrograms from './HeritagePrograms'
 
 const Home = () => {
   return (
@@ -14,9 +14,9 @@ const Home = () => {
       <Navbar />
       <Herobanner />
       <AboutUs />
-      <WhatWeOffer />
       <AimMission />
       <Service />
+      <HeritagePrograms />
       <Events />
       <ContactUs />
     </>

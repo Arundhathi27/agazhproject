@@ -13,6 +13,25 @@ const Herobanner = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
+  const titleText = "AGAZH".split("");
+  const titleVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1, 
+      transition: { staggerChildren: 0.15, delayChildren: 0.3 } 
+    }
+  };
+  const letterVariants = {
+    hidden: { y: 100, opacity: 0, rotateY: 90, scale: 0.8 },
+    visible: { 
+      y: 0, 
+      opacity: 1, 
+      rotateY: 0,
+      scale: 1,
+      transition: { type: 'spring', damping: 15, stiffness: 50 } 
+    }
+  };
+
   return (
     <div ref={containerRef} id="home" className="relative h-screen w-full overflow-hidden bg-brand-dark">
 
@@ -87,22 +106,47 @@ const Herobanner = () => {
           style={{ opacity }}
           className="mb-8"
         >
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="h-px w-24 bg-brand-tan mb-8 mx-auto"
-          />
+          <motion.div className="relative w-full flex flex-col items-center justify-center mb-8">
+            {/* Background Majestic Stroke Text */}
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 0.08 }}
+              transition={{ duration: 2, ease: "easeOut" }}
+              className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 -top-8 sm:-top-16"
+            >
+              <span className="font-regal font-light text-[35vw] text-transparent leading-none whitespace-nowrap" style={{ WebkitTextStroke: '2px #D7CCC8' }}>
+                AGAZH
+              </span>
+            </motion.div>
 
-          <motion.h1
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-7xl sm:text-8xl md:text-9xl lg:text-[13vw] leading-[0.9] font-display font-bold text-brand-tan tracking-tighter drop-shadow-2xl mb-4"
-          >
-            AGAZH<br />
-            <span className="text-white/90">AVAIYAM</span>
-          </motion.h1>
+            {/* Main Foreground Typography */}
+            <motion.h1
+              variants={titleVariants}
+              initial="hidden"
+              animate="visible"
+              className="relative z-10 flex flex-col items-center mt-12 sm:mt-0"
+            >
+              <div className="flex pt-4 pb-6 px-4 text-[5rem] sm:text-[7rem] md:text-[9.5rem] lg:text-[14vw] leading-none font-regal font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-brand-tan to-brand-accent tracking-tighter drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
+                {titleText.map((char, index) => (
+                  <motion.span key={index} variants={letterVariants} className="inline-block origin-bottom underline-none" style={{ textShadow: char !== " " ? '0 10px 30px rgba(0,0,0,0.5)' : 'none' }}>
+                    {char}
+                  </motion.span>
+                ))}
+              </div>
+              <motion.div 
+                initial={{ opacity: 0, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                transition={{ duration: 1.2, delay: 1.2, ease: "easeOut" }}
+                className="flex items-center gap-4 sm:gap-6 md:gap-8 mt-2 sm:mt-4 md:mt-6 lg:mt-4"
+              >
+                <div className="w-12 sm:w-20 md:w-32 lg:w-40 h-[1px] bg-gradient-to-r from-transparent to-brand-tan shadow-lg" />
+                <span className="text-[3rem] sm:text-[4rem] md:text-[6rem] lg:text-[8vw] leading-[0.8] font-display italic text-white tracking-widest drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] mx-2">
+                  AVAIYAM
+                </span>
+                <div className="w-12 sm:w-20 md:w-32 lg:w-40 h-[1px] bg-gradient-to-l from-transparent to-brand-tan shadow-lg" />
+              </motion.div>
+            </motion.h1>
+          </motion.div>
 
           <motion.p
             initial={{ opacity: 0 }}

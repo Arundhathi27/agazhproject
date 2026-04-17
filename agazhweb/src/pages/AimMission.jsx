@@ -1,12 +1,16 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
-const digImg = `${import.meta.env.BASE_URL}images/archaeology_dig_team_1768911719447.png`;
-const templeImg = `${import.meta.env.BASE_URL}images/hero_temple_ruins_1768917098837.png`;
-const artifactImg = `${import.meta.env.BASE_URL}images/ancient_artifact_hands_1768911747714.png`;
-const workshopImg = `${import.meta.env.BASE_URL}images/pottery_workshop_students_1768911974461.png`;
-const excavationImg = `${import.meta.env.BASE_URL}images/excavation_hands_1768917147028.png`;
-const sculptureImg = `${import.meta.env.BASE_URL}images/sculpture_detail_1768917167490.png`;
+const digImg = `${import.meta.env.BASE_URL}images/Ouraim1.jpeg`;
+const templeImg = `${import.meta.env.BASE_URL}images/Mission2.jpeg`;
+const artifactImg = `${import.meta.env.BASE_URL}images/excavation_hands.jpeg`;
+const workshopImg = `${import.meta.env.BASE_URL}images/Mission1.jpeg`;
+const Mission3 = `${import.meta.env.BASE_URL}images/Mission3.jpeg`;
+const Choose_Us2 = `${import.meta.env.BASE_URL}images/Choose_Us2.jpeg`;
+const Choose_Us1 = `${import.meta.env.BASE_URL}images/Choose_Us1.jpeg`;
+const Social_Awareness = `${import.meta.env.BASE_URL}images/Social_Awareness.jpeg`;
+const excavationImg = `${import.meta.env.BASE_URL}images/ancient_artifact_hands.jpeg`;
+const sculptureImg = `${import.meta.env.BASE_URL}images/sculpture_detail.jpeg`;
 
 /* ── stat pills shown in AIM section ── */
 const stats = [
@@ -53,7 +57,7 @@ const missionData = [
         color: 'from-brand-accent to-brand-brown',
         accent: '#8D6748',
         textColor: 'text-white',
-        img: digImg,
+        img: Social_Awareness,
         items: [
             'To promote awareness through campaigns, exhibitions, and outreach programmes that ensure heritage remains accessible, valued and protected for future generation.',
             "To advance awareness of education's importance in shaping lives, ensuring its reach extends to communities that have long remained undeserved.",
@@ -593,86 +597,266 @@ const AimMission = () => {
                         </motion.div>
                     </div>
 
-                    {/* ── Why Choose Us Section (Added) ── */}
-                    <div className="pt-16 sm:pt-24 border-t border-brand-brown/10">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                            {/* Left: Text */}
+                    {/* ── Why Choose Us — Portrait Cards ── */}
+                    <div className="pt-16 sm:pt-20 border-t border-brand-brown/10 -mx-4 sm:-mx-6 md:-mx-12 px-0">
+
+                        {/* ── Scrolling marquee ticker ── */}
+                        <div className="overflow-hidden bg-brand-dark py-3 mb-12 sm:mb-16 relative">
                             <motion.div
-                                initial={{ opacity: 0, x: -50 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.8 }}
+                                animate={{ x: ['0%', '-50%'] }}
+                                transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
+                                className="flex gap-0 whitespace-nowrap"
+                            >
+                                {[...Array(2)].map((_, repeat) => (
+                                    <span key={repeat} className="flex items-center">
+                                        {['Why Choose Us', '·', 'Beyond Textbooks', '·', 'Fieldwork', '·', 'Heritage Tours', '·', 'Research', '·', 'Est. 2024', '·'].map((item, i) => (
+                                            <span key={i} className={`px-6 font-mono text-[11px] uppercase tracking-[0.25em] ${item === '·' ? 'text-brand-tan' : 'text-white/50'}`}>
+                                                {item}
+                                            </span>
+                                        ))}
+                                    </span>
+                                ))}
+                            </motion.div>
+                        </div>
+
+                        {/* ── Section heading — left aligned ── */}
+                        <div className="px-4 sm:px-6 md:px-12 mb-10 sm:mb-14">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6 }}
                                 viewport={{ once: true }}
                             >
-                                <motion.div
-                                    initial={{ y: 10, opacity: 0 }}
-                                    whileInView={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.2 }}
-                                    viewport={{ once: true }}
-                                    className="inline-flex items-center gap-3 mb-6"
-                                >
-                                    <div className="h-px w-10 bg-brand-brown" />
-                                    <span className="font-mono text-xs uppercase tracking-[0.3em] text-brand-brown">Why Choose Us</span>
-                                </motion.div>
-
-                                <h3 className="text-4xl sm:text-5xl md:text-6xl font-display text-brand-dark leading-tight mb-8">
-                                    <span className="block">Beyond</span>
-                                    <span className="block text-brand-brown italic">Textbooks</span>
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="h-px w-8 bg-brand-brown" />
+                                    <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-brand-brown">Why Choose Us</span>
+                                </div>
+                                <h3 className="font-display text-5xl sm:text-6xl md:text-7xl text-brand-dark leading-none">
+                                    Beyond <span className="italic text-brand-brown">Textbooks</span>
                                 </h3>
+                            </motion.div>
+                        </div>
 
-                                <div className="space-y-6">
-                                    <p className="text-brand-dark/70 text-lg sm:text-xl leading-relaxed">
-                                        We believe that archaeology is most impactful when it <span className="font-bold text-brand-dark">goes beyond textbooks</span>. By combining fieldwork, experiential learning, and heritage tourism, we inspire a genuine appreciation for the past.
+                        {/* ── Three tall portrait cards ── */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 border-t border-brand-brown/10">
+
+                            {/* Card 1 — Fieldwork */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.7, delay: 0.1 }}
+                                viewport={{ once: true }}
+                                whileHover={{ y: -6 }}
+                                className="group relative flex flex-col border-r border-brand-brown/10 cursor-default transition-shadow duration-300 hover:shadow-2xl"
+                            >
+                                {/* Photo — top 55% */}
+                                <div className="relative overflow-hidden" style={{ height: '300px' }}>
+                                    <img
+                                        src={Mission3}
+                                        alt="Fieldwork"
+                                        className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-107"
+                                        style={{ transform: 'scale(1.05)' }}
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-dark/40" />
+                                    {/* Number overlay — bottom left of image */}
+                                    <div className="absolute bottom-0 left-0 right-0 px-8 pb-4 pt-12 bg-gradient-to-t from-brand-dark/80 to-transparent">
+                                        <span className="font-display text-white text-6xl sm:text-7xl leading-none block">100<span className="text-brand-tan text-3xl align-top mt-2 inline-block">+</span></span>
+                                    </div>
+                                </div>
+                                {/* Content area */}
+                                <div className="flex-1 bg-brand-light px-8 py-7 flex flex-col gap-3 group-hover:bg-white transition-colors duration-300">
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-lg">⛏️</span>
+                                        <span className="font-mono text-[10px] uppercase tracking-widest text-brand-brown">Fieldwork</span>
+                                    </div>
+                                    <p className="font-mono text-[11px] uppercase tracking-widest text-brand-dark/40">Field Sessions Conducted</p>
+                                    <p className="text-brand-dark/65 text-sm leading-relaxed mt-1">
+                                        Hands-on excavation sessions and real-site visits that bridge classroom learning with real-world application.
                                     </p>
-                                    <p className="text-brand-dark/70 text-base sm:text-lg leading-relaxed">
-                                        Our approach <span className="font-bold text-brand-brown">nurtures curiosity and lifelong learning</span>, helping participants build a personal connection to cultural legacies through discovery and participation.
-                                    </p>
+                                    {/* Animated underline */}
+                                    <motion.div
+                                        initial={{ scaleX: 0 }}
+                                        whileInView={{ scaleX: 1 }}
+                                        transition={{ delay: 0.5, duration: 0.7 }}
+                                        viewport={{ once: true }}
+                                        className="h-[2px] w-12 bg-brand-brown rounded-full mt-auto"
+                                        style={{ transformOrigin: 'left' }}
+                                    />
                                 </div>
                             </motion.div>
 
-                            {/* Right: Visual panel */}
+                            {/* Card 2 — Heritage Tours */}
                             <motion.div
-                                initial={{ opacity: 0, x: 50 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.8, delay: 0.2 }}
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.7, delay: 0.22 }}
                                 viewport={{ once: true }}
-                                className="relative"
+                                whileHover={{ y: -6 }}
+                                className="group relative flex flex-col border-r border-brand-brown/10 cursor-default transition-shadow duration-300 hover:shadow-2xl"
                             >
-                                <div className="relative h-64 sm:h-80 md:h-[400px] rounded-3xl overflow-hidden bg-white border-2 border-brand-brown/15 shadow-2xl">
-                                    {/* Sculpture watermark */}
-                                    <div className="absolute inset-0 opacity-[0.06]">
-                                        <img src={sculptureImg} alt="" className="w-full h-full object-cover object-center" />
+                                <div className="relative overflow-hidden" style={{ height: '300px' }}>
+                                    <img
+                                        src={Choose_Us2}
+                                        alt="Heritage Tours"
+                                        className="w-full h-full object-cover object-center transition-transform duration-700"
+                                        style={{ transform: 'scale(1.05)' }}
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-dark/40" />
+                                    <div className="absolute bottom-0 left-0 right-0 px-8 pb-4 pt-12 bg-gradient-to-t from-brand-dark/80 to-transparent">
+                                        <span className="font-display text-white text-6xl sm:text-7xl leading-none block">3<span className="text-brand-tan text-3xl align-top mt-2 inline-block">+</span></span>
                                     </div>
-                                    {/* Geometric grid overlay */}
-                                    <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `radial-gradient(circle, #5D4037 1px, transparent 1px)`, backgroundSize: '30px 30px' }} />
-                                    {/* Centre content */}
-                                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
-                                        <motion.div
-                                            animate={{ rotate: [0, 5, -5, 0] }}
-                                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                                            className="w-20 h-20 sm:w-28 rounded-2xl bg-gradient-to-br from-brand-brown to-brand-dark shadow-2xl flex items-center justify-center"
-                                        >
-                                            <span className="text-4xl sm:text-5xl">✨</span>
-                                        </motion.div>
-                                        {/* Three feature pills */}
-                                        <div className="flex flex-wrap gap-2 justify-center px-6">
-                                            {['Fieldwork', 'Heritage Tours', 'Research'].map((tag, i) => (
-                                                <motion.span
-                                                    key={tag}
-                                                    initial={{ opacity: 0, scale: 0.8 }}
-                                                    whileInView={{ opacity: 1, scale: 1 }}
-                                                    transition={{ delay: 0.6 + i * 0.15 }}
-                                                    viewport={{ once: true }}
-                                                    className="bg-brand-brown/10 text-brand-dark/70 font-mono text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-full border border-brand-brown/20"
-                                                >
-                                                    {tag}
-                                                </motion.span>
-                                            ))}
-                                        </div>
+                                </div>
+                                <div className="flex-1 bg-brand-dark px-8 py-7 flex flex-col gap-3 group-hover:bg-brand-brown/90 transition-colors duration-300">
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-lg">🏛️</span>
+                                        <span className="font-mono text-[10px] uppercase tracking-widest text-brand-tan">Heritage Tours</span>
                                     </div>
+                                    <p className="font-mono text-[11px] uppercase tracking-widest text-white/30">Heritage Trails</p>
+                                    <p className="text-white/60 text-sm leading-relaxed mt-1">
+                                        Curated trails through archaeological monuments that allow people to experience history first-hand.
+                                    </p>
+                                    <motion.div
+                                        initial={{ scaleX: 0 }}
+                                        whileInView={{ scaleX: 1 }}
+                                        transition={{ delay: 0.6, duration: 0.7 }}
+                                        viewport={{ once: true }}
+                                        className="h-[2px] w-12 bg-brand-tan rounded-full mt-auto"
+                                        style={{ transformOrigin: 'left' }}
+                                    />
+                                </div>
+                            </motion.div>
+
+                            {/* Card 3 — Research */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.7, delay: 0.34 }}
+                                viewport={{ once: true }}
+                                whileHover={{ y: -6 }}
+                                className="group relative flex flex-col cursor-default transition-shadow duration-300 hover:shadow-2xl"
+                            >
+                                <div className="relative overflow-hidden" style={{ height: '300px' }}>
+                                    <img
+                                        src={Choose_Us1}
+                                        alt="Research"
+                                        className="w-full h-full object-cover object-center transition-transform duration-700"
+                                        style={{ transform: 'scale(1.05)' }}
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-dark/40" />
+                                    <div className="absolute bottom-0 left-0 right-0 px-8 pb-4 pt-12 bg-gradient-to-t from-brand-dark/80 to-transparent">
+                                        <span className="font-display text-white text-6xl sm:text-7xl leading-none block">500<span className="text-brand-tan text-3xl align-top mt-2 inline-block">+</span></span>
+                                    </div>
+                                </div>
+                                <div className="flex-1 bg-brand-light px-8 py-7 flex flex-col gap-3 group-hover:bg-white transition-colors duration-300">
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-lg">🔬</span>
+                                        <span className="font-mono text-[10px] uppercase tracking-widest text-brand-brown">Research</span>
+                                    </div>
+                                    <p className="font-mono text-[11px] uppercase tracking-widest text-brand-dark/40">Learners Reached</p>
+                                    <p className="text-brand-dark/65 text-sm leading-relaxed mt-1">
+                                        Academic workshops that bridge curiosity and scholarship, fostering critical thinking for future generations.
+                                    </p>
+                                    <motion.div
+                                        initial={{ scaleX: 0 }}
+                                        whileInView={{ scaleX: 1 }}
+                                        transition={{ delay: 0.7, duration: 0.7 }}
+                                        viewport={{ once: true }}
+                                        className="h-[2px] w-12 bg-brand-brown rounded-full mt-auto"
+                                        style={{ transformOrigin: 'left' }}
+                                    />
                                 </div>
                             </motion.div>
                         </div>
+
+                        {/* ── Bottom content banner ── */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            viewport={{ once: true }}
+                            className="relative overflow-hidden bg-brand-dark"
+                        >
+                            {/* Subtle dot texture */}
+                            <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle, #C8A882 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
+                            {/* Warm glow accent — bottom right */}
+                            <div className="absolute bottom-0 right-0 w-96 h-96 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(141,103,72,0.18) 0%, transparent 70%)' }} />
+
+                            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-0 px-4 sm:px-6 md:px-12 py-12 sm:py-16">
+
+                                {/* Left — large italic pull-quote */}
+                                <motion.div
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.7, delay: 0.3 }}
+                                    viewport={{ once: true }}
+                                    className="flex flex-col justify-center lg:pr-16 lg:border-r border-white/10 mb-10 lg:mb-0"
+                                >
+                                    {/* Decorative open-quote */}
+                                    <span className="font-display text-brand-tan/20 leading-none select-none block" style={{ fontSize: '120px', lineHeight: '0.7', marginBottom: '16px' }}>"</span>
+                                    <p className="font-display text-white text-2xl sm:text-3xl md:text-4xl leading-snug italic">
+                                        We believe that archaeology is most impactful when it{' '}
+                                        <span className="text-brand-tan not-italic font-normal">goes beyond textbooks.</span>
+                                    </p>
+                                    <p className="text-white/45 text-sm sm:text-base leading-relaxed mt-5 max-w-md not-italic font-sans" style={{ fontFamily: 'inherit' }}>
+                                        By combining fieldwork, experiential learning, and heritage tourism, we inspire a genuine appreciation for the past.
+                                    </p>
+                                    {/* Animated underline */}
+                                    <motion.div
+                                        initial={{ scaleX: 0 }}
+                                        whileInView={{ scaleX: 1 }}
+                                        transition={{ delay: 0.7, duration: 0.9 }}
+                                        viewport={{ once: true }}
+                                        className="h-px w-16 bg-gradient-to-r from-brand-tan to-transparent mt-8"
+                                        style={{ transformOrigin: 'left' }}
+                                    />
+                                </motion.div>
+
+                                {/* Right — body text + feature pills */}
+                                <motion.div
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.7, delay: 0.4 }}
+                                    viewport={{ once: true }}
+                                    className="flex flex-col justify-center lg:pl-16 gap-8"
+                                >
+                                    <p className="text-white/60 text-base sm:text-lg leading-relaxed">
+                                        Our approach{' '}
+                                        <span className="font-semibold text-white">nurtures curiosity and lifelong learning</span>,
+                                        helping participants build a personal connection to cultural legacies through discovery and participation.
+                                    </p>
+
+                                    {/* Feature pills — stacked with icon + label + line */}
+                                    <div className="space-y-3">
+                                        {[
+                                            { icon: '⛏️', label: 'Fieldwork', desc: 'Real excavation. Real discovery.' },
+                                            { icon: '🏛️', label: 'Heritage Tours', desc: 'Walk through living history.' },
+                                            { icon: '🔬', label: 'Research', desc: 'Curiosity meets scholarship.' },
+                                        ].map((item, i) => (
+                                            <motion.div
+                                                key={item.label}
+                                                initial={{ opacity: 0, x: 16 }}
+                                                whileInView={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: 0.5 + i * 0.12, duration: 0.55 }}
+                                                viewport={{ once: true }}
+                                                className="flex items-center gap-4 group"
+                                            >
+                                                <div className="w-9 h-9 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-brown/40 transition-colors duration-300">
+                                                    <span className="text-base">{item.icon}</span>
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <span className="font-mono text-[11px] uppercase tracking-widest text-brand-tan block leading-none mb-0.5">{item.label}</span>
+                                                    <span className="font-mono text-[10px] text-white/35 tracking-wide">{item.desc}</span>
+                                                </div>
+                                                <div className="h-px flex-1 max-w-[60px] bg-white/10 hidden sm:block" />
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            </div>
+                        </motion.div>
+
                     </div>
+
 
                 </div>
             </div>

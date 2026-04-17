@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-const sculptureImg = `${import.meta.env.BASE_URL}images/sculpture_detail_1768917167490.png`;
-const teamImg = `${import.meta.env.BASE_URL}images/heritage_walk_team_1768917192614.png`;
+const teamImg = `${import.meta.env.BASE_URL}images/Aboutus2.jpeg`;
 
 const AboutUs = () => {
   const containerRef = useRef(null);
@@ -181,7 +180,7 @@ const AboutUs = () => {
         {/* Background image layer */}
         <div className="absolute inset-0">
           <img
-            src={`${import.meta.env.BASE_URL}images/excavation_site_artistic_1768911953440.png`}
+            src={`${import.meta.env.BASE_URL}images/excavation_site_artistic.jpeg`}
             alt=""
             className="w-full h-full object-cover object-center"
           />
@@ -382,7 +381,7 @@ const AboutUs = () => {
                 className="col-span-1 row-span-2 rounded-2xl overflow-hidden shadow-2xl aspect-[3/4]"
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}images/heritage_walk_team_1768917192614.png`}
+                  src={`${import.meta.env.BASE_URL}images/Meet_our_team1.jpeg`}
                   alt="Heritage walk team"
                   className="w-full h-full object-cover object-center"
                 />
@@ -399,7 +398,7 @@ const AboutUs = () => {
                 className="rounded-2xl overflow-hidden shadow-xl aspect-square"
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}images/students_workshop_1768917126967.png`}
+                  src={`${import.meta.env.BASE_URL}images/Meet_our_team2.jpeg`}
                   alt="Students workshop"
                   className="w-full h-full object-cover object-center"
                 />
@@ -416,7 +415,7 @@ const AboutUs = () => {
                 className="rounded-2xl overflow-hidden shadow-xl relative aspect-square"
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}images/career_guidance_1768917220575.png`}
+                  src={`${import.meta.env.BASE_URL}images/Meet_our_team3.jpeg`}
                   alt="Career guidance"
                   className="w-full h-full object-cover object-center"
                 />

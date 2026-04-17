@@ -90,7 +90,7 @@ const Navbar = () => {
                             alt="Agazh Avaiyam Logo"
                             className="h-12 w-12 object-cover rounded-full shadow-md transition-transform duration-300 group-hover:scale-110"
                         />
-                        <span className={`text-xl font-bold font-sans tracking-tight transition-colors ${scrolled && !isOpen ? 'text-brand-dark' : 'text-white'}`}>
+                        <span className={`text-xl font-bold font-display tracking-tight transition-colors ${scrolled && !isOpen ? 'text-brand-dark' : 'text-white'}`}>
                             AGAZH<span className={scrolled && !isOpen ? 'text-brand-accent' : 'text-brand-tan'}>AVAIYAM</span>
                         </span>
                     </a>

@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+
+@theme {
+  --color-brand-brown: #5D4037;
+  --color-brand-tan: #D7CCC8;
+  --color-brand-accent: #8D6E63;
+  --color-brand-light: #EFEBE9;
+  --color-brand-dark: #3E2723;
+
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Montserrat", sans-serif;
+  --font-display: "Cormorant Garamond", serif;
+  --font-regal: "Cinzel Decorative", serif;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+:root {
+  --bg-color: #EFEBE9;
+  /* Brand Light */
+}
+
+body {
+  background-color: var(--bg-color);
+  color: #3E2723;
+  /* Brand Dark */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #5D4037;
+  /* Brand Brown */
+  color: #EFEBE9;
+}
+
+/* Hide Scrollbar but keep functionality */
+::-webkit-scrollbar {
+  width: 0px;
+  background: var(--color-brand-light);
+}

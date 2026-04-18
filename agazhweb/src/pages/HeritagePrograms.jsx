@@ -1,6 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
+const schoolImg = `${import.meta.env.BASE_URL}images/Schools1.jpeg`;
+const collegeImg = `${import.meta.env.BASE_URL}images/College1.jpeg`;
+const layImg = `${import.meta.env.BASE_URL}images/Lay1.jpeg`;
+
 /* ─────────────────────────── helpers ─────────────────────────── */
 const useCountUp = (target, duration = 2000, start = false) => {
   const [count, setCount] = useState(0);
@@ -68,7 +72,7 @@ const SectionLabel = ({ children }) => (
   </motion.span>
 );
 
-/* ─────────────── Program Card (hero-style) ─────────────── */
+/* ─────────────── Target Audience Card (hero-style) ─────────────── */
 const ProgramCard = ({ item, index }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
@@ -84,65 +88,36 @@ const ProgramCard = ({ item, index }) => {
       className="relative group"
     >
       {/* Connector line */}
-      {index < 3 && (
+      {index < 2 && (
         <div className="hidden lg:block absolute left-1/2 -bottom-12 w-px h-12 bg-gradient-to-b from-brand-accent/40 to-transparent z-10" />
       )}
 
       <div className={`grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden shadow-2xl shadow-brand-dark/10 border border-brand-tan/30 group-hover:shadow-brand-accent/20 transition-all duration-700`}>
-        {/* Accent Panel */}
+        {/* Image Panel */}
         <div
-          className={`relative p-10 flex flex-col justify-center min-h-[320px] ${isEven ? 'order-1' : 'order-1 lg:order-2'}`}
-          style={{ background: item.gradient }}
+          className={`relative h-[320px] lg:h-auto overflow-hidden ${isEven ? 'order-1' : 'order-1 lg:order-2'}`}
         >
-          <ParticleField />
-          {/* Icon */}
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center mb-6 shadow-lg"
-          >
-            <span className="text-3xl">{item.icon}</span>
-          </motion.div>
-
-          <h3 className="font-display text-3xl font-bold text-white mb-3 leading-tight">{item.title}</h3>
-          <div className="flex flex-wrap gap-2 mt-4">
-            {item.tags.map((tag) => (
-              <span key={tag} className="text-[10px] font-sans font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-white/20 text-white/90 backdrop-blur-sm">
-                {tag}
-              </span>
-            ))}
+          <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 via-brand-dark/20 to-transparent"></div>
+          {/* Number Badge */}
+          <div className="absolute top-6 right-6 w-14 h-14 bg-brand-dark/80 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/10 z-10">
+            <span className="text-brand-tan font-display text-xl font-bold">{item.id}</span>
           </div>
-
-          {/* Decorative circle */}
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-            className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full border border-white/10"
-          />
-          <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-white/5 blur-2xl" />
         </div>
 
         {/* Content Panel */}
-        <div className={`bg-white p-10 flex flex-col justify-between ${isEven ? 'order-2' : 'order-2 lg:order-1'}`}>
-          <div className="space-y-6">
-            <InfoBlock label="What It Is" text={item.whatItIs} color={item.accentColor} />
-            <InfoBlock label="Who It's For" text={item.whoItsFor} color={item.accentColor} />
-            <InfoBlock label="Outcome & Impact" text={item.outcome} color={item.accentColor} />
+        <div className={`bg-white p-10 lg:p-16 flex flex-col justify-center ${isEven ? 'order-2' : 'order-2 lg:order-1'}`}>
+          <div className="flex items-center gap-2 mb-6">
+            <div className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
+            <span className="text-[10px] sm:text-xs font-sans font-bold uppercase tracking-[0.2em] text-brand-accent">{item.category}</span>
           </div>
+          <h3 className="font-display text-4xl lg:text-5xl font-bold text-brand-dark mb-6 leading-tight">{item.title}</h3>
+          <p className="font-sans text-base lg:text-lg text-brand-dark/70 leading-relaxed max-w-lg">{item.desc}</p>
         </div>
       </div>
     </motion.div>
   );
 };
-
-const InfoBlock = ({ label, text, color }) => (
-  <div className="group/block">
-    <div className="flex items-center gap-2 mb-2">
-      <div className="w-1.5 h-1.5 rounded-full" style={{ background: color }} />
-      <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-brand-accent">{label}</span>
-    </div>
-    <p className="font-sans text-sm text-brand-dark/70 leading-relaxed pl-3.5">{text}</p>
-  </div>
-);
 
 /* ─────────────── Events Section ─────────────── */
 const EventCard = ({ title, desc, badge, delay }) => {
@@ -302,49 +277,26 @@ const HeritagePrograms = () => {
 
   const programs = [
     {
-      title: 'Heritage Education Programs',
-      subtitle: 'Experiential Heritage Learning (EHL) Programme',
-      icon: '🏛️',
-      gradient: 'linear-gradient(135deg, #3E2723 0%, #5D4037 50%, #8D6E63 100%)',
-      accentColor: '#8D6E63',
-      tags: ['Year-Long Initiative', 'Grades 6–9', 'In-Campus', 'Interdisciplinary'],
-      whatItIs: 'The Experiential Heritage Learning (EHL) Programme is a structured, year-long initiative that integrates heritage, history, environment, and cultural knowledge into activity-based modules. It transforms textbook learning into immersive, real-world experiences.',
-      whoItsFor: 'Designed for students in Grades 6–9 across all school types, while also extending to colleges and general audiences through broader initiatives.',
-      outcome: 'Students strengthen academic understanding through field engagement, observation, and interdisciplinary exploration. The program nurtures critical thinking, ethical awareness, and meaningful connections with heritage.',
+      title: "Schools",
+      desc: "Curated heritage walks and interactive workshops designed to spark curiosity in young minds.",
+      img: schoolImg,
+      id: "01",
+      category: "Early Education"
     },
     {
-      title: 'Workshops & Storytelling Sessions',
-      subtitle: 'Experiential Archaeology & Field Explorations',
-      icon: '🪄',
-      gradient: 'linear-gradient(135deg, #5D4037 0%, #795548 50%, #A1887F 100%)',
-      accentColor: '#795548',
-      tags: ['Interactive', 'Pottery-Making', 'Excavations', 'Heritage Trails'],
-      whatItIs: 'Experiential archaeology workshops featuring practical sessions like pottery-making, simulated excavations, and experimental archaeology, combined with storytelling and field exploration.',
-      whoItsFor: 'Students, schools, colleges, and the general public.',
-      outcome: 'Encourages creativity, curiosity, and active participation while helping participants connect personally with history and cultural traditions.',
+      title: "Colleges",
+      desc: "In-depth field explorations and career guidance programs to help students pursue pathways in archaeology.",
+      img: collegeImg,
+      id: "02",
+      category: "Higher Learning"
     },
     {
-      title: 'School Activities & Clubs',
-      subtitle: 'Extra-Curricular Heritage Learning (EHL)',
-      icon: '🎓',
-      gradient: 'linear-gradient(135deg, #4E342E 0%, #6D4C41 50%, #8D6E63 100%)',
-      accentColor: '#6D4C41',
-      tags: ['4 Classes/Month', 'Career Guidance', 'Grades 6–9', 'All School Types'],
-      whatItIs: 'An extracurricular heritage learning program integrated into school schedules, offering regular sessions and career guidance in archaeology and humanities.',
-      whoItsFor: 'Students in Grades 6–9 across all types of schools.',
-      outcome: 'Develops observation, inquiry, documentation, and communication skills through experiential learning that complements academic studies.',
-    },
-    {
-      title: 'Events & Field Experiences',
-      subtitle: 'Heritage Walks, Explorations & Awareness Campaigns',
-      icon: '🗺️',
-      gradient: 'linear-gradient(135deg, #3E2723 0%, #4E342E 50%, #6D4C41 100%)',
-      accentColor: '#5D4037',
-      tags: ['Heritage Walks', 'Site Visits', 'Awareness Campaigns', 'Open to All'],
-      whatItIs: 'Curated heritage walks, archaeological site visits, and awareness campaigns designed to bring history to life through direct exploration.',
-      whoItsFor: 'Open to schools, colleges, and the general audience.',
-      outcome: 'Promotes heritage awareness, cultural appreciation, and responsible engagement with historical sites while creating memorable learning experiences.',
-    },
+      title: "Lay Audience",
+      desc: "Engaging community events and heritage tourism that bring history to life for enthusiasts.",
+      img: layImg,
+      id: "03",
+      category: "Community Engagement"
+    }
   ];
 
   const partnerItems = [
@@ -425,33 +377,6 @@ const HeritagePrograms = () => {
               We believe that archaeology is most impactful when it goes beyond textbooks. By combining fieldwork, practical learning, and heritage tourism, we create transformative learning experiences that inspire curiosity, creativity, and a deeper connection to cultural heritage.
             </motion.p>
           </div>
-
-          {/* Scroll indicator */}
-          {/* <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
-            className="mt-14 flex flex-col items-center gap-2"
-          >
-            <span className="text-[10px] font-sans uppercase tracking-widest text-white/30">Explore Programs</span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center pt-1.5"
-            >
-              <div className="w-1 h-2 rounded-full bg-white/40" />
-            </motion.div>
-          </motion.div> */}
-        </div>
-      </div>
-
-      {/* ── STAT BAR ── */}
-      <div style={{ background: 'linear-gradient(90deg, #3E2723, #5D4037, #3E2723)' }} className="py-12 px-6">
-        <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          <StatCounter value={4} label="Core Programs" />
-          <StatCounter value={6} label="Grades Served" suffix="" />
-          <StatCounter value={4} label="Sessions / Month" />
-          <StatCounter value={100} label="Heritage Engagement" suffix="%" />
         </div>
       </div>
 
@@ -479,20 +404,29 @@ const HeritagePrograms = () => {
         </div>
       </div>
 
-      {/* ── PROGRAMS THAT TRANSFORM ── */}
+      {/* ── TARGET AUDIENCE ── */}
       <div className="relative py-24 px-6 bg-brand-light/50 border-t border-brand-brown/5">
         <div className="relative max-w-5xl mx-auto">
           <div className="text-center mb-20">
-            <SectionLabel>Programs That Transform</SectionLabel>
+            <SectionLabel>Target Audience</SectionLabel>
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="font-display text-4xl md:text-6xl font-bold text-brand-dark"
+              className="font-display text-4xl md:text-6xl font-bold text-brand-dark mb-4"
             >
-              Academic <span className="text-brand-accent italic">& Social Impact</span>
+              Inspiring knowledge across <span className="text-brand-accent italic">generations</span>
             </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="font-display text-xl md:text-2xl text-brand-brown/80 max-w-2xl mx-auto"
+            >
+               Knowledge for Every Generation
+            </motion.p>
           </div>
 
           <div className="flex flex-col gap-20">
@@ -503,131 +437,6 @@ const HeritagePrograms = () => {
         </div>
       </div>
 
-      {/* ── EVENTS & UPDATES ── */}
-      <div className="py-24 px-6" style={{ background: 'linear-gradient(180deg, #EFEBE9 0%, #E8E0DC 100%)' }}>
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <SectionLabel>Events & Updates</SectionLabel>
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="font-display text-4xl md:text-6xl font-bold text-brand-dark"
-            >
-              Our <span className="text-brand-accent italic">Stories</span> in the Field
-            </motion.h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 mb-10">
-            <EventCard
-              badge="Upcoming"
-              title="Upcoming Events"
-              desc="Content to be updated with future schedules. Stay tuned for our upcoming heritage walks, workshops, and educational programs."
-              delay={0}
-            />
-            <EventCard
-              badge="Past Event"
-              title="Velammal Institution Workshop"
-              desc="We recently executed successful projects with Velammal Institution. This included a two-day hands-on Archaeology Workshop featuring interactive simulated excavations and pottery-making."
-              delay={0.1}
-            />
-            <EventCard
-              badge="Highlight"
-              title="Heritage Walk at Mahabalipuram"
-              desc="A major highlight from our recent work was the Heritage Walk at Mahabalipuram, where students not only explored Pallava architecture but also created their own hand-drawn site maps. These programs successfully fostered creativity and a deeper connection to living history."
-              delay={0.2}
-            />
-          </div>
-
-          {/* Photo placeholder with shimmer */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative rounded-2xl overflow-hidden border border-brand-tan/40 bg-brand-dark/5"
-            style={{ minHeight: 220 }}
-          >
-            <div className="absolute inset-0 flex items-center justify-center flex-col gap-3 p-8">
-              <motion.div
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="w-14 h-14 rounded-full bg-brand-accent/20 flex items-center justify-center text-2xl"
-              >
-                📸
-              </motion.div>
-              <p className="font-display text-xl text-brand-dark/50 italic text-center">
-                Event photos from Velammal Institution & Mahabalipuram Heritage Walk — coming soon
-              </p>
-              <span className="text-xs font-sans text-brand-accent/60 uppercase tracking-widest">Photos to be inserted</span>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* ── PARTNER WITH US ── */}
-      <div className="relative py-24 px-6 overflow-hidden"
-        style={{ background: 'linear-gradient(160deg, #3E2723 0%, #5D4037 60%, #6D4C41 100%)' }}
-      >
-        <ParticleField />
-
-        <motion.div animate={{ rotate: 360 }} transition={{ duration: 70, repeat: Infinity, ease: 'linear' }}
-          className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full border border-white/5 -translate-y-1/2 translate-x-1/4"
-        />
-
-        <div className="relative max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <SectionLabel>Collaboration</SectionLabel>
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="font-display text-4xl md:text-6xl font-bold text-white mb-6"
-            >
-              Partner <span className="text-brand-tan italic">With Us</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="font-sans text-sm text-brand-tan/60 max-w-2xl mx-auto leading-relaxed"
-            >
-              Guided by collaboration and inclusivity, Agazh Avaiyam seeks to grow as a collective force for knowledge, heritage, and sustainable progress. Education and community engagement stand at the heart of our mission.
-            </motion.p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {partnerItems.map((p, i) => (
-              <PartnerCard key={p.title} icon={p.icon} title={p.title} desc={p.desc} delay={i * 0.15} />
-            ))}
-          </div>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-center mt-14"
-          >
-            <motion.a
-              href="#contactus"
-              onClick={(e) => { e.preventDefault(); document.getElementById('contactus')?.scrollIntoView({ behavior: 'smooth' }); }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-white text-brand-dark font-sans font-bold text-sm uppercase tracking-widest shadow-2xl shadow-black/20 hover:bg-brand-tan transition-colors duration-300"
-            >
-              Get In Touch
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </motion.a>
-          </motion.div>
-        </div>
-      </div>
 
     </section>
   );

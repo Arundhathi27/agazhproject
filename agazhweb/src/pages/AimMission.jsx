@@ -658,10 +658,6 @@ const AimMission = () => {
                                         style={{ transform: 'scale(1.05)' }}
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-dark/40" />
-                                    {/* Number overlay — bottom left of image */}
-                                    <div className="absolute bottom-0 left-0 right-0 px-8 pb-4 pt-12 bg-gradient-to-t from-brand-dark/80 to-transparent">
-                                        <span className="font-display text-white text-6xl sm:text-7xl leading-none block">100<span className="text-brand-tan text-3xl align-top mt-2 inline-block">+</span></span>
-                                    </div>
                                 </div>
                                 {/* Content area */}
                                 <div className="flex-1 bg-brand-light px-8 py-7 flex flex-col gap-3 group-hover:bg-white transition-colors duration-300">
@@ -702,9 +698,6 @@ const AimMission = () => {
                                         style={{ transform: 'scale(1.05)' }}
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-dark/40" />
-                                    <div className="absolute bottom-0 left-0 right-0 px-8 pb-4 pt-12 bg-gradient-to-t from-brand-dark/80 to-transparent">
-                                        <span className="font-display text-white text-6xl sm:text-7xl leading-none block">3<span className="text-brand-tan text-3xl align-top mt-2 inline-block">+</span></span>
-                                    </div>
                                 </div>
                                 <div className="flex-1 bg-brand-dark px-8 py-7 flex flex-col gap-3 group-hover:bg-brand-brown/90 transition-colors duration-300">
                                     <div className="flex items-center gap-2">
@@ -743,9 +736,6 @@ const AimMission = () => {
                                         style={{ transform: 'scale(1.05)' }}
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-dark/40" />
-                                    <div className="absolute bottom-0 left-0 right-0 px-8 pb-4 pt-12 bg-gradient-to-t from-brand-dark/80 to-transparent">
-                                        <span className="font-display text-white text-6xl sm:text-7xl leading-none block">500<span className="text-brand-tan text-3xl align-top mt-2 inline-block">+</span></span>
-                                    </div>
                                 </div>
                                 <div className="flex-1 bg-brand-light px-8 py-7 flex flex-col gap-3 group-hover:bg-white transition-colors duration-300">
                                     <div className="flex items-center gap-2">

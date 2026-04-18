@@ -1,8 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Herobanner from './Herobanner'
-import Service from './Service'
-import Events from './Events'
+import Events, { PartnerWithUs } from './Events'
 import AboutUs from './Aboutus'
 import AimMission from './AimMission'
 import ContactUs from './ContactUs'
@@ -15,9 +14,9 @@ const Home = () => {
       <Herobanner />
       <AboutUs />
       <AimMission />
-      <Service />
       <HeritagePrograms />
       <Events />
+      <PartnerWithUs />
       <ContactUs />
     </>
   )

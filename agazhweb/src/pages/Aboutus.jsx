@@ -156,7 +156,7 @@ const AboutUs = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-brand-brown/60 font-mono text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest block mb-1">Established</span>
-                      <span className="text-brand-dark font-display text-2xl sm:text-3xl font-bold">2024</span>
+                      <span className="text-brand-dark font-display text-2xl sm:text-3xl font-bold">2025</span>
                     </div>
                     <motion.div
                       animate={{ rotate: 360 }}

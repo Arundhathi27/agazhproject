@@ -1,21 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import logoImg from '../Images/logo.png';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { createPortal } from 'react-dom';
 
-const smoothScrollTo = (href, e) => {
-    if (e) e.preventDefault();
-    const id = href.replace('#', '');
-    const el = document.getElementById(id);
-    if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+const smoothScrollTo = (id, e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!id || id === '#') return;
+    
+    // Allow a small delay for page route changes before scrolling
+    setTimeout(() => {
+        const el = document.getElementById(id.replace('#', ''));
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, 100);
 };
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleNavigation = (to, e) => {
+        if (e) e.preventDefault();
+        
+        if (to.startsWith('/#')) {
+            const hash = to.replace('/', '');
+            if (location.pathname === '/') {
+                smoothScrollTo(hash);
+            } else {
+                navigate(to);
+            }
+        } else {
+            navigate(to);
+            window.scrollTo(0, 0);
+        }
+        setIsOpen(false);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -72,10 +96,9 @@ const Navbar = () => {
     };
 
     const navLinks = [
-        { name: 'Home', href: '#home', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
-        { name: 'About Us', href: '#aboutus', icon: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
-        { name: 'Services', href: '#service', icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
-        { name: 'Events', href: '#events', icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' }
+        { name: 'Home', to: '/#home', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
+        { name: 'About Us', to: '/aboutus', icon: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
+        { name: 'Events', to: '/#events', icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' }
     ];
 
     return (
@@ -84,7 +107,7 @@ const Navbar = () => {
                 <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
 
                     {/* Logo */}
-                    <a href="#" className="flex items-center gap-3 group relative z-[10000]">
+                    <Link to="/" onClick={() => handleNavigation('/')} className="flex items-center gap-3 group relative z-[10000]">
                         <img
                             src={logoImg}
                             alt="Agazh Avaiyam Logo"
@@ -93,7 +116,7 @@ const Navbar = () => {
                         <span className={`text-xl font-bold font-display tracking-tight transition-colors ${scrolled && !isOpen ? 'text-brand-dark' : 'text-white'}`}>
                             AGAZH<span className={scrolled && !isOpen ? 'text-brand-accent' : 'text-brand-tan'}>AVAIYAM</span>
                         </span>
-                    </a>
+                    </Link>
 
                     {/* Mobile Menu Button - 3D Animated */}
                     <div className="md:hidden relative z-[10000]">
@@ -133,18 +156,18 @@ const Navbar = () => {
                     {/* Desktop Links */}
                     <div className="hidden md:flex items-center space-x-10">
                         {navLinks.map((link) => (
-                            <a
+                            <Link
                                 key={link.name}
-                                href={link.href}
-                                onClick={(e) => smoothScrollTo(link.href, e)}
+                                to={link.to}
+                                onClick={(e) => handleNavigation(link.to, e)}
                                 className={`text-xs font-bold uppercase tracking-widest transition-colors ${scrolled ? 'text-brand-dark/70 hover:text-brand-dark' : 'text-white/80 hover:text-white'}`}
                             >
                                 {link.name}
-                            </a>
+                            </Link>
                         ))}
 
                         {/* CTA Button */}
-                        <a href="#contactus" onClick={(e) => smoothScrollTo('#contactus', e)} className={`text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-sm transition-colors shadow-lg ${scrolled ? 'bg-brand-accent text-white hover:bg-brand-brown' : 'bg-white text-brand-dark hover:bg-brand-tan'}`}>
+                        <a href="/#contactus" onClick={(e) => handleNavigation('/#contactus', e)} className={`text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-sm transition-colors shadow-lg ${scrolled ? 'bg-brand-accent text-white hover:bg-brand-brown' : 'bg-white text-brand-dark hover:bg-brand-tan'}`}>
                             Contact Us
                         </a>
                     </div>
@@ -199,36 +222,38 @@ const Navbar = () => {
                                         {/* Navigation Links */}
                                         <div className="flex flex-col space-y-4">
                                             {navLinks.map((link) => (
-                                                <motion.a
-                                                    href={link.href}
+                                                <motion.div
                                                     key={link.name}
                                                     variants={linkVariants}
-                                                    whileHover={{ x: 10, scale: 1.02 }}
-                                                    onClick={(e) => { smoothScrollTo(link.href, e); setIsOpen(false); }}
-                                                    className="group flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-brand-tan/20 transition-all duration-300 active:scale-95"
                                                 >
-                                                    <div className="w-10 h-10 rounded-lg bg-brand-tan/10 flex items-center justify-center text-brand-tan group-hover:bg-brand-tan group-hover:text-brand-dark transition-colors duration-300">
-                                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={link.icon}></path>
-                                                        </svg>
-                                                    </div>
-                                                    <span className="text-white font-display text-lg tracking-wide group-hover:text-brand-tan transition-colors">
-                                                        {link.name}
-                                                    </span>
+                                                    <Link
+                                                        to={link.to}
+                                                        onClick={(e) => handleNavigation(link.to, e)}
+                                                        className="group flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-brand-tan/20 transition-all duration-300 active:scale-95"
+                                                    >
+                                                        <div className="w-10 h-10 rounded-lg bg-brand-tan/10 flex items-center justify-center text-brand-tan group-hover:bg-brand-tan group-hover:text-brand-dark transition-colors duration-300">
+                                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={link.icon}></path>
+                                                            </svg>
+                                                        </div>
+                                                        <span className="text-white font-display text-lg tracking-wide group-hover:text-brand-tan transition-colors">
+                                                            {link.name}
+                                                        </span>
 
-                                                    <div className="ml-auto opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300">
-                                                        <svg className="w-5 h-5 text-brand-tan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                                                        </svg>
-                                                    </div>
-                                                </motion.a>
+                                                        <div className="ml-auto opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300">
+                                                            <svg className="w-5 h-5 text-brand-tan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </Link>
+                                                </motion.div>
                                             ))}
 
                                             {/* Contact Link Special */}
                                             <motion.div variants={linkVariants} className="pt-6">
                                                 <a
-                                                    href="#contactus"
-                                                    onClick={(e) => { smoothScrollTo('#contactus', e); setIsOpen(false); }}
+                                                    href="/#contactus"
+                                                    onClick={(e) => handleNavigation('/#contactus', e)}
                                                     className="relative group block w-full text-center py-4 bg-gradient-to-r from-brand-accent to-brand-brown rounded-xl overflow-hidden shadow-lg shadow-brand-accent/20"
                                                 >
                                                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />

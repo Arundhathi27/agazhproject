@@ -1,6 +1,27 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
+import AboutUsPage from './pages/AboutUsPage';
 import Lenis from 'lenis';
+
+const ScrollToHash = () => {
+    const { pathname, hash } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0); // Always scroll to top on route change
+        
+        if (hash) {
+            setTimeout(() => {
+                const element = document.getElementById(hash.replace('#', ''));
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
+        }
+    }, [pathname, hash]);
+
+    return null;
+};
 
 const App = () => {
     useEffect(() => {
@@ -27,9 +48,15 @@ const App = () => {
     }, []);
 
     return (
-        <main className="antialiased">
-            <Home />
-        </main>
+        <Router basename={import.meta.env.BASE_URL}>
+            <ScrollToHash />
+            <main className="antialiased">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/aboutus" element={<AboutUsPage />} />
+                </Routes>
+            </main>
+        </Router>
     );
 };
 

@@ -1,14 +1,15 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import AimVisionSection from '../components/AimVisionSection';
 import ContactUs from './ContactUs';
+import ArtifactOrb from '../components/ArtifactOrb';
+import HeritageAstrolabe from '../components/HeritageAstrolabe';
 
 const teamImg = `${import.meta.env.BASE_URL}images/Aboutus2.jpeg`;
 
 const AboutUsPage = () => {
   const containerRef = useRef(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -34,6 +35,11 @@ const AboutUsPage = () => {
           <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-brand-accent/10 rounded-full blur-[120px] pointer-events-none" />
           <div className="absolute -left-32 top-1/4 text-[400px] font-regal text-brand-light/[0.02] pointer-events-none select-none leading-none">
              A
+          </div>
+
+          {/* ── 3D Artifact Orb — top-right floating accent ── */}
+          <div className="hidden lg:flex absolute top-8 right-8 xl:right-16 items-center justify-center z-0 opacity-70">
+            <ArtifactOrb />
           </div>
           
           <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-10 items-center">
@@ -191,87 +197,117 @@ const AboutUsPage = () => {
           </div>
         </section>
 
-        {/* ── Distinct Quote Section — architectural separation ── */}
-        <div className="relative overflow-hidden bg-brand-brown border-t-2 border-brand-accent/20">
+        {/* ── Quote + Astrolabe Section — proper two-column ── */}
+        <div className="relative overflow-hidden bg-[#2C1810] border-t border-brand-accent/20">
 
-          {/* Subtle architectural texture and gradient instead of heavy image */}
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.03)_50%,transparent_75%,transparent_100%)] bg-[length:6px_6px]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/50 via-transparent to-brand-dark/50" />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent" />
-
-          {/* Decorative orbital rings */}
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
-            className="absolute -right-24 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-white/[0.04] hidden lg:block"
-          />
-          <motion.div
-            animate={{ rotate: -360 }}
-            transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
-            className="absolute -right-8 top-1/2 -translate-y-1/2 w-80 h-80 rounded-full border border-brand-tan/10 hidden lg:block"
-          />
+          {/* Texture overlays */}
+          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.02)_50%,transparent_75%,transparent_100%)] bg-[length:4px_4px]" />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-dark/60 via-transparent to-brand-accent/20" />
 
           {/* Ambient glow */}
           <motion.div
-            animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute bottom-0 left-1/4 w-96 h-40 bg-brand-brown/30 blur-3xl rounded-full pointer-events-none"
+            animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.3, 0.15] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute -top-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-brand-accent/10 blur-[100px] rounded-full pointer-events-none"
           />
 
-          {/* Content */}
-          <div className="relative max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 py-20 sm:py-28 md:py-36">
-            <div className="max-w-4xl mx-auto text-center">
+          {/* Two-column content */}
+          <div className="relative max-w-[1400px] mx-auto px-6 sm:px-8 md:px-12 py-24 sm:py-32">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
-              {/* Animated quote-mark icon */}
+              {/* LEFT — Astrolabe */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.6 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="mb-8 sm:mb-10 flex justify-center"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col items-center justify-center gap-8 relative z-10"
               >
                 <div className="relative">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-brand-tan/30 absolute inset-0 m-auto"
-                  />
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-2xl">
-                    <span className="text-3xl sm:text-4xl">🏛️</span>
-                  </div>
+                   {/* Background glow for Astrolabe */}
+                   <div className="absolute inset-0 bg-brand-tan/10 blur-2xl rounded-full scale-150" />
+                   <HeritageAstrolabe />
                 </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                  className="flex items-center gap-4 mt-2"
+                >
+                  <div className="h-[1px] w-8 bg-brand-tan/30" />
+                  <p className="text-brand-tan/60 font-mono text-[10px] sm:text-xs uppercase tracking-[0.4em] text-center">
+                    Heritage · Navigation · Legacy
+                  </p>
+                  <div className="h-[1px] w-8 bg-brand-tan/30" />
+                </motion.div>
               </motion.div>
 
-              {/* Large decorative open-quote */}
+              {/* RIGHT — Quote text */}
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="font-display text-[6rem] sm:text-[8rem] text-brand-tan/20 leading-none -mb-10 sm:-mb-14 select-none"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                className="flex flex-col items-center text-center lg:items-start lg:text-left relative z-10"
               >
-                "
+                {/* Icon */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                  className="mb-8 sm:mb-10 flex flex-col items-center lg:flex-row lg:items-center gap-4 lg:gap-6"
+                >
+                  <div className="relative">
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-brand-tan/20 absolute inset-0 m-auto border-dashed"
+                    />
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+                      <span className="text-2xl sm:text-3xl filter drop-shadow-md">🏛️</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center lg:items-start">
+                    <div className="hidden lg:block h-[2px] w-12 bg-gradient-to-r from-brand-tan/40 to-transparent mb-1" />
+                    <span className="font-mono text-[10px] sm:text-xs text-brand-tan/60 uppercase tracking-[0.2em] lg:tracking-[0.3em] font-medium">Our Ethos</span>
+                  </div>
+                </motion.div>
+
+                {/* Large open-quote mark */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                  viewport={{ once: true }}
+                  className="relative flex justify-center lg:justify-start w-full"
+                >
+                  <span className="font-display text-[6rem] sm:text-[8rem] md:text-[10rem] text-brand-tan/15 leading-none block -mb-8 sm:-mb-14 md:-mb-16 select-none relative lg:-left-6">
+                    &ldquo;
+                  </span>
+                </motion.div>
+
+                {/* Quote text */}
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                  viewport={{ once: true }}
+                  className="text-white/95 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display italic leading-[1.4] md:leading-[1.3] mb-8 sm:mb-10 relative z-10 drop-shadow-lg max-w-2xl mx-auto lg:mx-0"
+                >
+                  Together, we honor the echoes of the past while shaping a future where heritage thrives.
+                </motion.p>
+
+                {/* Underline */}
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  transition={{ delay: 0.8, duration: 1.2, ease: "easeInOut" }}
+                  viewport={{ once: true }}
+                  className="h-[2px] w-32 sm:w-48 bg-gradient-to-r from-transparent via-brand-tan lg:from-brand-tan lg:via-brand-accent/50 to-transparent"
+                />
               </motion.div>
-
-              {/* The quote */}
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35, duration: 0.9 }}
-                viewport={{ once: true }}
-                className="text-white/90 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-display italic leading-relaxed mb-4"
-              >
-                Together, we honor the echoes of the past while shaping a future where heritage thrives.
-              </motion.p>
-
-              {/* Animated underline */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                transition={{ delay: 0.7, duration: 1 }}
-                viewport={{ once: true }}
-                className="h-[2px] w-32 sm:w-44 bg-gradient-to-r from-transparent via-brand-tan to-transparent mx-auto mt-6 sm:mt-8"
-              />
 
             </div>
           </div>

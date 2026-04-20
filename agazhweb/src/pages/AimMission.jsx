@@ -136,6 +136,24 @@ const AimMission = () => {
 
                 <div className="relative max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12">
 
+                    {/* ── Section heading ── */}
+                    <div className="mb-10 sm:mb-14">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            viewport={{ once: true }}
+                        >
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="h-px w-8 bg-brand-brown" />
+                                <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-brand-brown">Mission Focus</span>
+                            </div>
+                            <h3 className="font-display text-5xl sm:text-6xl md:text-7xl text-brand-dark leading-none">
+                                Our <span className="italic text-brand-brown">Core Areas</span>
+                            </h3>
+                        </motion.div>
+                    </div>
+
                     {/* Tab + Panel layout */}
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 items-start mb-20 sm:mb-28 md:mb-36">
 

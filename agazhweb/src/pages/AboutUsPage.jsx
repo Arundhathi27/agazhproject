@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Navbar from '../components/Navbar';
-import AimVisionSection from '../components/AimVisionSection';
 import ContactUs from './ContactUs';
 import ArtifactOrb from '../components/ArtifactOrb';
 import HeritageAstrolabe from '../components/HeritageAstrolabe';
+import OurPurposeSection from '../components/OurPurposeSection';
 
 const teamImg = `${import.meta.env.BASE_URL}images/Aboutus2.jpeg`;
 
@@ -313,6 +313,9 @@ const AboutUsPage = () => {
           </div>
         </div>
 
+        {/* ── Our Purpose Section ── */}
+        <OurPurposeSection />
+
         {/* ── Meet Our Team — Bright split panel ── */}
         <div className="relative bg-brand-light overflow-hidden py-16 sm:py-24 md:py-32">
 
@@ -479,8 +482,7 @@ const AboutUsPage = () => {
         </div>
 
 
-        {/* Aim & Vision Sections */}
-        <AimVisionSection />
+
 
       </div>
       <ContactUs />

@@ -72,9 +72,10 @@ const OurPurposeSection = () => {
                 <div className="absolute inset-0 bg-brand-dark/10 mix-blend-multiply z-10 pointer-events-none" />
                 {/* Full natural aspect ratio image */}
                 <img
-                  src={`${import.meta.env.BASE_URL}images/Ouraim1.jpeg`}
+                  src={`${import.meta.env.BASE_URL}images/Ouraim1.webp`}
                   alt="Agazh Avaiyam Overview"
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
               </div>
             </motion.div>
@@ -87,9 +88,10 @@ const OurPurposeSection = () => {
               <div className="w-full h-full relative overflow-hidden bg-[#2C1810]">
                 <div className="absolute inset-0 bg-brand-brown/20 mix-blend-multiply z-10 pointer-events-none" />
                 <img
-                  src={`${import.meta.env.BASE_URL}images/heritage_walk_team1.jpeg`}
+                  src={`${import.meta.env.BASE_URL}images/heritage_walk_team1.webp`}
                   alt="Archaeology Detail"
                   className="w-full h-full object-cover grayscale opacity-90"
+                  loading="lazy"
                 />
               </div>
             </motion.div>

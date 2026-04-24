@@ -1,12 +1,13 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import SEOHead from '../components/SEOHead';
 import Navbar from '../components/Navbar';
 import ContactUs from './ContactUs';
 import ArtifactOrb from '../components/ArtifactOrb';
 import HeritageAstrolabe from '../components/HeritageAstrolabe';
 import OurPurposeSection from '../components/OurPurposeSection';
 
-const teamImg = `${import.meta.env.BASE_URL}images/Aboutus2.jpeg`;
+const teamImg = `${import.meta.env.BASE_URL}images/Aboutus2.webp`;
 
 const AboutUsPage = () => {
   const containerRef = useRef(null);
@@ -23,6 +24,11 @@ const AboutUsPage = () => {
 
   return (
     <>
+      <SEOHead 
+        title="About Us | Agazh Avaiyam — Making Archaeology Accessible"
+        description="Learn about Agazh Avaiyam, our team, vision, and mission to make archaeology engaging and accessible to all through hands-on education and heritage programs."
+        ogUrl="/aboutus"
+      />
       <Navbar />
       <div className="bg-brand-light">
         {/* ── Asymmetrical Premium Editorial Hero ── */}
@@ -432,9 +438,10 @@ const AboutUsPage = () => {
                   className="col-span-1 row-span-2 rounded-2xl overflow-hidden shadow-2xl aspect-[3/4]"
                 >
                   <img
-                    src={`${import.meta.env.BASE_URL}images/Meet_our_team1.jpeg`}
+                    src={`${import.meta.env.BASE_URL}images/Meet_our_team1.webp`}
                     alt="Heritage walk team"
                     className="w-full h-full object-cover object-center"
+                    loading="lazy"
                   />
                 </motion.div>
 
@@ -449,9 +456,10 @@ const AboutUsPage = () => {
                   className="rounded-2xl overflow-hidden shadow-xl aspect-square"
                 >
                   <img
-                    src={`${import.meta.env.BASE_URL}images/Meet_our_team2.jpeg`}
+                    src={`${import.meta.env.BASE_URL}images/Meet_our_team2.webp`}
                     alt="Students workshop"
                     className="w-full h-full object-cover object-center"
+                    loading="lazy"
                   />
                 </motion.div>
 
@@ -466,9 +474,10 @@ const AboutUsPage = () => {
                   className="rounded-2xl overflow-hidden shadow-xl relative aspect-square"
                 >
                   <img
-                    src={`${import.meta.env.BASE_URL}images/Meet_our_team3.jpeg`}
+                    src={`${import.meta.env.BASE_URL}images/Meet_our_team3.webp`}
                     alt="Career guidance"
                     className="w-full h-full object-cover object-center"
+                    loading="lazy"
                   />
                   {/* dark overlay with label */}
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent flex items-end p-3 sm:p-4">

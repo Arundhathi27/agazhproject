@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Home from './pages/Home';
-import AboutUsPage from './pages/AboutUsPage';
 import Lenis from 'lenis';
+import StructuredData from './components/StructuredData';
+
+const Home = React.lazy(() => import('./pages/Home'));
+const AboutUsPage = React.lazy(() => import('./pages/AboutUsPage'));
 
 const ScrollToHash = () => {
     const { pathname, hash } = useLocation();
@@ -49,15 +51,19 @@ const App = () => {
 
     return (
         <Router basename={import.meta.env.BASE_URL}>
+            <StructuredData />
             <ScrollToHash />
             <main className="antialiased">
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/aboutus" element={<AboutUsPage />} />
-                </Routes>
+                <Suspense fallback={<div className="h-screen w-screen flex items-center justify-center bg-brand-dark text-brand-tan">Loading...</div>}>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/aboutus" element={<AboutUsPage />} />
+                    </Routes>
+                </Suspense>
             </main>
         </Router>
     );
 };
 
 export default App;
+

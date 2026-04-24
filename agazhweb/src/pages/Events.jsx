@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-const heritageImg = `${import.meta.env.BASE_URL}images/heritage_walk_team1.jpeg`;
-const workshopImg = `${import.meta.env.BASE_URL}images/excavation_hands1.jpeg`;
-const careerImg = `${import.meta.env.BASE_URL}images/career_guidance1.jpeg`;
+const heritageImg = `${import.meta.env.BASE_URL}images/heritage_walk_team1.webp`;
+const workshopImg = `${import.meta.env.BASE_URL}images/excavation_hands1.webp`;
+const careerImg = `${import.meta.env.BASE_URL}images/career_guidance1.webp`;
 
 const projects = [
   {
@@ -57,6 +57,7 @@ const Card = ({ i, project, progress, range, targetScale }) => {
             src={project.img}
             alt={project.title}
             className="w-full h-full object-cover"
+            loading="lazy"
           />
           {/* Gradient Overlays */}
           <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/95 to-brand-dark/40"></div>

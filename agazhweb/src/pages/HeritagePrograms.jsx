@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
-const schoolImg = `${import.meta.env.BASE_URL}images/Schools1.jpeg`;
-const collegeImg = `${import.meta.env.BASE_URL}images/College1.jpeg`;
-const layImg = `${import.meta.env.BASE_URL}images/Lay1.jpeg`;
+const schoolImg = `${import.meta.env.BASE_URL}images/Schools1.webp`;
+const collegeImg = `${import.meta.env.BASE_URL}images/College1.webp`;
+const layImg = `${import.meta.env.BASE_URL}images/Lay1.webp`;
 
 /* ─────────────────────────── helpers ─────────────────────────── */
 const useCountUp = (target, duration = 2000, start = false) => {
@@ -97,7 +97,7 @@ const ProgramCard = ({ item, index }) => {
         <div
           className={`relative h-[320px] lg:h-auto overflow-hidden ${isEven ? 'order-1' : 'order-1 lg:order-2'}`}
         >
-          <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 via-brand-dark/20 to-transparent"></div>
           {/* Number Badge */}
           <div className="absolute top-6 right-6 w-14 h-14 bg-brand-dark/80 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/10 z-10">

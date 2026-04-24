@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
-const templeImg = `${import.meta.env.BASE_URL}images/Mission2.jpeg`;
-const workshopImg = `${import.meta.env.BASE_URL}images/Mission1.jpeg`;
-const Mission3 = `${import.meta.env.BASE_URL}images/Mission3.jpeg`;
-const Choose_Us2 = `${import.meta.env.BASE_URL}images/Choose_Us2.jpeg`;
-const Choose_Us1 = `${import.meta.env.BASE_URL}images/Choose_Us1.jpeg`;
-const Social_Awareness = `${import.meta.env.BASE_URL}images/Social_Awareness.jpeg`;
-const sculptureImg = `${import.meta.env.BASE_URL}images/sculpture_detail.jpeg`;
+const templeImg = `${import.meta.env.BASE_URL}images/Mission2.webp`;
+const workshopImg = `${import.meta.env.BASE_URL}images/Mission1.webp`;
+const Mission3 = `${import.meta.env.BASE_URL}images/Mission3.webp`;
+const Choose_Us2 = `${import.meta.env.BASE_URL}images/Choose_Us2.webp`;
+const Choose_Us1 = `${import.meta.env.BASE_URL}images/Choose_Us1.webp`;
+const Social_Awareness = `${import.meta.env.BASE_URL}images/Social_Awareness.webp`;
+const sculptureImg = `${import.meta.env.BASE_URL}images/sculpture_detail.webp`;
 
 /* ── mission data ── */
 const missionData = [
@@ -201,6 +201,7 @@ const AimMission = () => {
                                                     src={item.img}
                                                     alt={item.category}
                                                     className="w-full h-full object-cover object-center scale-105"
+                                                    loading="lazy"
                                                 />
                                                 <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-80`} />
                                                 <div className="absolute inset-0 flex items-end p-6 sm:p-8">
@@ -318,6 +319,7 @@ const AimMission = () => {
                                         alt="Fieldwork"
                                         className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-107"
                                         style={{ transform: 'scale(1.05)' }}
+                                        loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-dark/40" />
                                 </div>
@@ -358,6 +360,7 @@ const AimMission = () => {
                                         alt="Heritage Tours"
                                         className="w-full h-full object-cover object-center transition-transform duration-700"
                                         style={{ transform: 'scale(1.05)' }}
+                                        loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-dark/40" />
                                 </div>
@@ -396,6 +399,7 @@ const AimMission = () => {
                                         alt="Research"
                                         className="w-full h-full object-cover object-center transition-transform duration-700"
                                         style={{ transform: 'scale(1.05)' }}
+                                        loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-dark/40" />
                                 </div>

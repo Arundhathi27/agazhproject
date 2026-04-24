@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-const schoolImg = `${import.meta.env.BASE_URL}images/Schools1.jpeg`;
-const collegeImg = `${import.meta.env.BASE_URL}images/College1.jpeg`;
-const layImg = `${import.meta.env.BASE_URL}images/Lay1.jpeg`;
+const schoolImg = `${import.meta.env.BASE_URL}images/Schools1.webp`;
+const collegeImg = `${import.meta.env.BASE_URL}images/College1.webp`;
+const layImg = `${import.meta.env.BASE_URL}images/Lay1.webp`;
 
 const audienceData = [
   {
@@ -37,6 +37,7 @@ const ServiceCard = ({ item }) => {
           src={item.img}
           alt={item.title}
           className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110 filter grayscale-[0.3] group-hover:grayscale-0"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 to-transparent"></div>
 

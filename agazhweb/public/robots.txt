@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://arundhathi27.github.io/agazhproject/sitemap.xml

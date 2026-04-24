@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import ConnectOrb from '../components/ConnectOrb';
 
 const ContactUs = () => {
@@ -53,13 +54,31 @@ const ContactUs = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate an API submission (to be replaced with actual e.g. Formspree/EmailJS)
-    setTimeout(() => {
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone || 'Not provided',
+      message: formData.message,
+    };
+
+    emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      templateParams,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
+    .then((response) => {
       setIsSubmitting(false);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', message: '' });
       setTimeout(() => setSubmitStatus(null), 5000);
-    }, 1500);
+    })
+    .catch((err) => {
+      console.error('EmailJS Error:', err);
+      setIsSubmitting(false);
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus(null), 5000);
+    });
   };
 
   return (
@@ -230,6 +249,8 @@ const ContactUs = () => {
                     className={`w-full relative overflow-hidden rounded-full py-4 sm:py-5 border flex items-center justify-center font-mono uppercase tracking-widest text-[10px] sm:text-xs transition-all duration-300 ${
                       submitStatus === 'success' 
                       ? 'bg-transparent border-green-500/50 text-green-400 shadow-[0_0_20px_rgba(34,197,94,0.1)]'
+                      : submitStatus === 'error'
+                      ? 'bg-transparent border-red-500/50 text-red-500 shadow-[0_0_20px_rgba(239,68,68,0.1)]'
                       : 'bg-brand-tan/10 hover:bg-brand-tan hover:text-brand-dark border-brand-tan/30 text-brand-tan shadow-lg'
                     }`}
                   >
@@ -244,6 +265,10 @@ const ContactUs = () => {
                     ) : submitStatus === 'success' ? (
                       <span className="flex items-center gap-2">
                         Message Sent Successfully
+                      </span>
+                    ) : submitStatus === 'error' ? (
+                      <span className="flex items-center gap-2">
+                        Failed to Send
                       </span>
                     ) : (
                       "Submit Query"

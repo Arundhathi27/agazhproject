@@ -13,14 +13,6 @@ const faqs = [
   {
     question: "Who can participate in Agazh Avaiyam programs?",
     answer: "Our programs are designed for three audiences: Schools (curated heritage walks and interactive workshops for young minds), Colleges (in-depth field explorations and career guidance in archaeology), and Lay Audience (engaging community events and heritage tourism for enthusiasts)."
-  },
-  {
-    question: "Where is Agazh Avaiyam located?",
-    answer: "Agazh Avaiyam operates across Tamil Nadu, India, conducting heritage walks, archaeological workshops, and cultural tours at various historical and archaeological sites throughout the state."
-  },
-  {
-    question: "How can I contact Agazh Avaiyam?",
-    answer: "You can reach us by phone at +91 93618 61147 (Mon-Sat, 9AM-6PM), email at agazhavaiyam.org@gmail.com, or follow us on Instagram @agazhavaiyam. You can also use the contact form on our website."
   }
 ];
 
@@ -28,7 +20,7 @@ const FAQItem = ({ faq, index, activeIndex, setActiveIndex }) => {
   const isActive = activeIndex === index;
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -97,14 +89,14 @@ const FAQ = () => {
         }}
       />
 
-      <motion.div 
+      <motion.div
         style={{ y: parallaxY }}
         className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none"
       />
       <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-brand-brown/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
-        
+
         {/* Left Column - Editorial Intro */}
         <div className="lg:col-span-5 lg:sticky lg:top-32">
           <motion.div
@@ -131,12 +123,12 @@ const FAQ = () => {
             </p>
 
             <div className="relative w-32 h-32 hidden lg:flex items-center justify-center">
-              <motion.div 
+              <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
                 className="absolute inset-0 rounded-full border border-brand-tan/20 border-dashed"
               />
-              <motion.div 
+              <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
                 className="absolute inset-4 rounded-full border border-brand-tan/10"
@@ -150,17 +142,17 @@ const FAQ = () => {
         <div className="lg:col-span-7">
           <div className="border-t border-brand-tan/10">
             {faqs.map((faq, index) => (
-              <FAQItem 
-                key={index} 
-                faq={faq} 
-                index={index} 
-                activeIndex={activeIndex} 
-                setActiveIndex={setActiveIndex} 
+              <FAQItem
+                key={index}
+                faq={faq}
+                index={index}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
               />
             ))}
           </div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -170,7 +162,7 @@ const FAQ = () => {
             <p className="text-white/60 text-sm font-light">
               Still have questions? We're here to help.
             </p>
-            <a 
+            <a
               href="#contactus"
               onClick={(e) => {
                 e.preventDefault();

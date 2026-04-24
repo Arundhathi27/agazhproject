@@ -61,3 +61,12 @@ body {
   width: 0px;
   background: var(--color-brand-light);
 }
+
+/* Hide scrollbar for horizontal team strip */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

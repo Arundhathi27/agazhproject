@@ -85,22 +85,6 @@ const StructuredData = () => {
           "@type": "Answer",
           "text": "Our programs are designed for three audiences: Schools (curated heritage walks and interactive workshops for young minds), Colleges (in-depth field explorations and career guidance in archaeology), and Lay Audience (engaging community events and heritage tourism for enthusiasts)."
         }
-      },
-      {
-        "@type": "Question",
-        "name": "Where is Agazh Avaiyam located?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Agazh Avaiyam operates across Tamil Nadu, India, conducting heritage walks, archaeological workshops, and cultural tours at various historical and archaeological sites throughout the state."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How can I contact Agazh Avaiyam?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "You can reach us by phone at +91 93618 61147 (Mon-Sat, 9AM-6PM), email at agazhavaiyam.org@gmail.com, or follow us on Instagram @agazhavaiyam. You can also use the contact form on our website."
-        }
       }
     ]
   };
